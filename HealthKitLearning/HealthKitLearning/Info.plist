@@ -60,5 +60,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs to access your health records to analyze your workouts.</string>
 </dict>
 </plist>
