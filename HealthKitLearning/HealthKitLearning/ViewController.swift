@@ -11,7 +11,7 @@ import HealthKit
 
 class ViewController: UIViewController {
     
-    let healthStore = HKHealthStore()
+    var healthStore: HKHealthStore!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,22 @@ class ViewController: UIViewController {
     
     func getWorkouts() {
         if HKHealthStore.isHealthDataAvailable() {
+            healthStore = HKHealthStore()
             print("Available", healthStore)
-            healthStore.
+            performQuery()
         }
+    }
+    
+    func performQuery() {
+        print("performQuery")
+        guard let sampleType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
+            fatalError("*** This method should never fail ***")
+        }
+        let query = HKSampleQuery(sampleType: sampleType, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { (query, samples, error) in
+            print("inside query")
+            print(query, samples?.count, error)
+        }
+        healthStore.execute(query)
     }
 
 
